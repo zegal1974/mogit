@@ -1,0 +1,79 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @profile.name %>
+</p>
+
+<p>
+  <strong>Last update:</strong>
+  <%= @profile.last_update %>
+</p>
+
+<p>
+  <strong>Faction:</strong>
+  <%= @profile.faction %>
+</p>
+
+<p>
+  <strong>Race:</strong>
+  <%= @profile.race %>
+</p>
+
+<p>
+  <strong>Level:</strong>
+  <%= @profile.level %>
+</p>
+
+<p>
+  <strong>Claxx:</strong>
+  <%= @profile.claxx %>
+</p>
+
+<p>
+  <strong>Money:</strong>
+  <%= @profile.money %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @profile.gender %>
+</p>
+
+<p>
+  <strong>Played:</strong>
+  <%= @profile.played %>
+</p>
+
+<p>
+  <strong>Played this level:</strong>
+  <%= @profile.played_this_level %>
+</p>
+
+<p>
+  <strong>Active covenant:</strong>
+  <%= @profile.active_covenant_id %>
+</p>
+
+<p>
+  <strong>Last logout:</strong>
+  <%= @profile.last_logout %>
+</p>
+
+<p>
+  <strong>Zone:</strong>
+  <%= @profile.zone %>
+</p>
+
+<p>
+  <strong>Sub zone:</strong>
+  <%= @profile.sub_zone %>
+</p>
+
+<p>
+  <strong>Bind location:</strong>
+  <%= @profile.bind_location %>
+</p>
+
+<%= link_to 'Edit', edit_profile_path(@profile) %> |
+<%= link_to 'Back', profiles_path %>

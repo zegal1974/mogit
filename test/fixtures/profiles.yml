@@ -1,0 +1,35 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  last_update: 2021-05-22 15:17:11
+  faction: 1
+  race: 1
+  level: 1
+  claxx: 1
+  money: 1
+  gender: 1
+  played: 1
+  played_this_level: 1
+  active_covenant: one
+  last_logout: 2021-05-22 15:17:11
+  zone: MyString
+  sub_zone: MyString
+  bind_location: MyString
+
+two:
+  name: MyString
+  last_update: 2021-05-22 15:17:11
+  faction: 1
+  race: 1
+  level: 1
+  claxx: 1
+  money: 1
+  gender: 1
+  played: 1
+  played_this_level: 1
+  active_covenant: two
+  last_logout: 2021-05-22 15:17:11
+  zone: MyString
+  sub_zone: MyString
+  bind_location: MyString
