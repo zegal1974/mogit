@@ -1,0 +1,2 @@
+class FactionGroup < ApplicationRecord
+end

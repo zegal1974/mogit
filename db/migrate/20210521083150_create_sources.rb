@@ -1,8 +1,7 @@
 class CreateSources < ActiveRecord::Migration[6.1]
   def change
     create_table :sources do |t|
-      t.string :name
-      t.integer :did
+      t.string :name      
       t.integer :inv_type
       t.integer :visual_id
       t.integer :category_id

@@ -1,12 +1,12 @@
-class CreateProfiles < ActiveRecord::Migration[6.1]
+class CreateCharacters < ActiveRecord::Migration[6.1]
   def change
-    create_table :profiles do |t|
+    create_table :characters do |t|
       t.string :name
       t.datetime :last_update
-      t.integer :faction
-      t.integer :race
+      t.belongs_to :faction, null: false, foreign_key: true
+      t.belongs_to :race, null: false, foreign_key: true
       t.integer :level
-      t.integer :claxx
+      t.belongs_to :chr_class, null: false, foreign_key: true
       t.integer :money
       t.integer :gender
       t.integer :played

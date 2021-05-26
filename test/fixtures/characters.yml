@@ -2,34 +2,34 @@
 
 one:
   name: MyString
-  last_update: 2021-05-22 15:17:11
-  faction: 1
-  race: 1
+  last_update: 2021-05-25 11:32:09
+  faction: one
+  race: one
   level: 1
-  claxx: 1
+  chr_class: one
   money: 1
   gender: 1
   played: 1
   played_this_level: 1
   active_covenant: one
-  last_logout: 2021-05-22 15:17:11
+  last_logout: 2021-05-25 11:32:09
   zone: MyString
   sub_zone: MyString
   bind_location: MyString
 
 two:
   name: MyString
-  last_update: 2021-05-22 15:17:11
-  faction: 1
-  race: 1
+  last_update: 2021-05-25 11:32:09
+  faction: two
+  race: two
   level: 1
-  claxx: 1
+  chr_class: two
   money: 1
   gender: 1
   played: 1
   played_this_level: 1
   active_covenant: two
-  last_logout: 2021-05-22 15:17:11
+  last_logout: 2021-05-25 11:32:09
   zone: MyString
   sub_zone: MyString
   bind_location: MyString

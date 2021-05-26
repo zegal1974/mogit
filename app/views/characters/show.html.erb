@@ -1,0 +1,79 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @character.name %>
+</p>
+
+<p>
+  <strong>Last update:</strong>
+  <%= @character.last_update %>
+</p>
+
+<p>
+  <strong>Faction:</strong>
+  <%= @character.faction_id %>
+</p>
+
+<p>
+  <strong>Race:</strong>
+  <%= @character.race_id %>
+</p>
+
+<p>
+  <strong>Level:</strong>
+  <%= @character.level %>
+</p>
+
+<p>
+  <strong>Chr class:</strong>
+  <%= @character.chr_class_id %>
+</p>
+
+<p>
+  <strong>Money:</strong>
+  <%= @character.money %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @character.gender %>
+</p>
+
+<p>
+  <strong>Played:</strong>
+  <%= @character.played %>
+</p>
+
+<p>
+  <strong>Played this level:</strong>
+  <%= @character.played_this_level %>
+</p>
+
+<p>
+  <strong>Active covenant:</strong>
+  <%= @character.active_covenant_id %>
+</p>
+
+<p>
+  <strong>Last logout:</strong>
+  <%= @character.last_logout %>
+</p>
+
+<p>
+  <strong>Zone:</strong>
+  <%= @character.zone %>
+</p>
+
+<p>
+  <strong>Sub zone:</strong>
+  <%= @character.sub_zone %>
+</p>
+
+<p>
+  <strong>Bind location:</strong>
+  <%= @character.bind_location %>
+</p>
+
+<%= link_to 'Edit', edit_character_path(@character) %> |
+<%= link_to 'Back', characters_path %>

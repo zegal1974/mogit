@@ -6,6 +6,9 @@ ruby '3.0.0'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.1'
 
 gem 'sqlite3', '~> 1.4'
+gem 'pg'
+
+gem 'bulk_insert'
 
 gem 'puma', '~> 5.0'
 
@@ -43,8 +46,8 @@ end
 
 group :test do
   gem 'capybara', '>= 3.26'
-  gem 'selenium-webdriver'
-  gem 'webdrivers'
+  # gem 'selenium-webdriver'
+  # gem 'webdrivers'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

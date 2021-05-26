@@ -1,0 +1,2 @@
+class ChrClass < ApplicationRecord
+end

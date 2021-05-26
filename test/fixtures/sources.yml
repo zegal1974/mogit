@@ -6,8 +6,7 @@ one:
   inv_type: 1
   visual_id: 1
   did: 1
-  category: 1
-  nvType: 1
+  category_id: 1
   is_collected: false
   is_hide: false
   item_id: 1
@@ -23,8 +22,7 @@ two:
   inv_type: 1
   visual_id: 1
   did: 1
-  category: 1
-  nvType: 1
+  category_id: 1
   is_collected: false
   is_hide: false
   item_id: 1
