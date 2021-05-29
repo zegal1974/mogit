@@ -47,4 +47,7 @@ rails g model item_set_member set:belongs_to item:belongs_to
 rails g model item_appearance display_type:integer icon_file_data_id:integer order:integer player_condition_id:integer is_collected:boolean is_hide:boolean
 rails g model item_appearance_items appearance:belongs_to item:belongs_to order:integer source_type:integer
 
+rails g model transmog_set_group name 
+rails g model transmog_set name class_mask:integer group:belongs_to flags tracking_quest:belongs_to item_name_description:belongs_to parent:belongs_to order:integer
 
+chrs = lua['DataStore_CharactersDB']['global']['Characters']

@@ -84,15 +84,44 @@ module ItemLoader
         records[row['ItemID']].merge!(map_convert(MAP_ITEM_APPEARANCE_ITEMS, row))
       end
 
+      load_item_sets(path) do |i, set, item|
+        records[item][:set_id] = set if !records[item].nil?
+      end
+
       records.each do |key, r|
         r[:name] ||= ''
         r[:allowable_race] ||= '-1'
         r[:appearance_id] ||= nil
         r[:source_type] ||= nil
+        r[:set_id] ||= nil
       end
 
       Item.delete_all
       Item.insert_all!(records.values)
+    end
+
+    MAP_ITEM_SET = {
+      id: 'ID',
+      name: 'Name_lang',
+      flags: 'SetFlags'
+    }
+
+    def load_item_sets path=nil, &block
+      sets = {}
+      csv = load_csv "/itemset.csv", path
+      csv.each do |row|
+        next if row['ID'].nil?
+        sets[row['ID']] = {}
+        sets[row['ID']].merge!(map_convert(MAP_ITEM_SET, row))
+        (0..16).each do |i|
+          id = row["ItemID[#{i}]"]
+          next if id == 0 or id == '0'
+          yield i, row['ID'], id
+        end
+      end
+
+      ItemSet.delete_all
+      ItemSet.insert_all!(sets.values)
     end
 
     MAP_ITEM_APPEARANCE = {
@@ -102,7 +131,7 @@ module ItemLoader
       order: 'UiOrder',
       player_condition_id: 'PlayerConditionID'
     }
-    # display_type:integer icon_file_data_id:integer order:integer 
+
     def load_item_appearances path=nil
       csv = load_csv "/itemappearance.csv", path
       records = {}
@@ -113,6 +142,55 @@ module ItemLoader
       end
       ItemAppearance.delete_all
       ItemAppearance.insert_all!(records.values)
+    end
+
+    MAP_TRANSMOG_SET_GROUP = {
+      id: 'ID',
+      name: 'Name_lang'
+    }
+
+    def load_transmog_set_groups path=nil
+      csv = load_csv "/transmogsetgroup.csv", path
+      records = {}
+      csv.each do |row|
+        next if row['ID'].nil?
+        records[row['ID']] = map_convert(MAP_TRANSMOG_SET_GROUP, row)
+      end
+      TransmogSetGroup.delete_all
+      TransmogSetGroup.insert_all!(records.values)
+    end
+
+    MAP_TRANSMOG_SET = {
+      id: 'ID',
+      name: 'Name_lang',
+      class_mask: 'ClassMask',
+      tracking_quest_id: 'TrackingQuestID',
+      flags: 'Flags',
+      group_id: 'TransmogSetGroupID',
+      item_name_description_id: 'ItemNameDescriptionID',
+      parent_id: 'ParentTransmogSetID',
+      order: 'UiOrder'
+    }
+
+    def load_transmog_sets path=nil
+      csv = load_csv "/transmogset.csv", path
+      records = {}
+      csv.each do |row|
+        next if row['ID'].nil?
+        records[row['ID']] = map_convert(MAP_TRANSMOG_SET, row)
+      end
+      TransmogSet.delete_all
+      TransmogSet.insert_all!(records.values)
+    end
+
+    def load_item_all
+      load_item_appearances
+      load_item_classes
+      load_item_sub_classes
+      load_items
+      load_item_sets
+      load_transmog_set_groups
+      load_transmog_sets
     end
   end
 end

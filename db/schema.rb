@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_26_060152) do
+ActiveRecord::Schema.define(version: 2021_05_27_071348) do
 
   create_table "characters", force: :cascade do |t|
     t.string "name"
+    t.integer "realm_id"
     t.datetime "last_update"
     t.integer "faction_id", null: false
     t.integer "race_id", null: false
@@ -23,7 +24,7 @@ ActiveRecord::Schema.define(version: 2021_05_26_060152) do
     t.integer "gender"
     t.integer "played"
     t.integer "played_this_level"
-    t.integer "active_covenant_id", null: false
+    t.integer "active_covenant_id"
     t.datetime "last_logout"
     t.string "zone"
     t.string "sub_zone"
@@ -34,6 +35,7 @@ ActiveRecord::Schema.define(version: 2021_05_26_060152) do
     t.index ["chr_class_id"], name: "index_characters_on_chr_class_id"
     t.index ["faction_id"], name: "index_characters_on_faction_id"
     t.index ["race_id"], name: "index_characters_on_race_id"
+    t.index ["realm_id"], name: "index_characters_on_realm_id"
   end
 
   create_table "chr_classes", force: :cascade do |t|
@@ -71,12 +73,18 @@ ActiveRecord::Schema.define(version: 2021_05_26_060152) do
     t.integer "player_condition_id"
     t.boolean "is_collected", default: false
     t.boolean "is_hide", default: false
+    t.index ["player_condition_id"], name: "index_item_appearances_on_player_condition_id"
   end
 
   create_table "item_classes", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "item_sets", force: :cascade do |t|
+    t.string "name"
+    t.integer "flags"
   end
 
   create_table "item_sub_classes", force: :cascade do |t|
@@ -119,26 +127,30 @@ ActiveRecord::Schema.define(version: 2021_05_26_060152) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "sources", force: :cascade do |t|
+  create_table "realms", force: :cascade do |t|
     t.string "name"
-    t.integer "inv_type"
-    t.integer "visual_id"
-    t.integer "category_id"
-    t.integer "stype"
-    t.boolean "is_collected", default: false
-    t.boolean "is_hide", default: false
-    t.integer "item_id"
-    t.integer "item_mod_id"
-    t.integer "quality"
-    t.boolean "condition"
-    t.string "user_error"
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "characters", "active_covenants"
-  add_foreign_key "characters", "chr_classes"
-  add_foreign_key "characters", "factions"
-  add_foreign_key "characters", "races"
+  create_table "transmog_set_groups", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "transmog_sets", force: :cascade do |t|
+    t.string "name"
+    t.integer "class_mask"
+    t.integer "group_id", null: false
+    t.string "flags"
+    t.integer "tracking_quest_id"
+    t.integer "item_name_description_id"
+    t.integer "parent_id"
+    t.integer "order"
+    t.index ["group_id"], name: "index_transmog_sets_on_group_id"
+    t.index ["item_name_description_id"], name: "index_transmog_sets_on_item_name_description_id"
+    t.index ["parent_id"], name: "index_transmog_sets_on_parent_id"
+    t.index ["tracking_quest_id"], name: "index_transmog_sets_on_tracking_quest_id"
+  end
+
 end

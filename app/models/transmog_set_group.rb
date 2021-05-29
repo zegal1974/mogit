@@ -1,0 +1,2 @@
+class TransmogSetGroup < ApplicationRecord
+end

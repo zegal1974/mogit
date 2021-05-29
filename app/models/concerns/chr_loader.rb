@@ -31,7 +31,7 @@ module ChrLoader
       name: 'Name_lang',
       prefix_name: 'ClientPrefix',
       fname: 'ClientFileString',
-      fname: 'Filename',
+      # fname: 'Filename',
       description: 'Description_lang'
     }
 
@@ -46,7 +46,7 @@ module ChrLoader
       end
     end
 
-    def load_all
+    def load_chr_all
       load_classes
       load_races
     end

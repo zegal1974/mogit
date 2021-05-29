@@ -4,7 +4,7 @@ module FactionLoader
   extend ActiveSupport::Concern
 
   module ClassMethods
-    include CSVLoader
+    include CsvLoader
 
     MAP_FACTION = {
       id: 'ID',
