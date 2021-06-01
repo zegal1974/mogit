@@ -40,10 +40,13 @@ class DatastoreLoaderTest < ActiveSupport::TestCase
         }
       }
     ]
-    lua = Rufus::Lua::State.new
-    lua.eval(content)
-    c = lua['DataStore_CharactersDB']['global']['Characters'].to_h
-    character = Character.load_character c.keys[0], c.values[0]
-    p character
+    # lua = Rufus::Lua::State.new
+    # lua.eval(content)
+    # c = lua['DataStore_CharactersDB']['global']['Characters'].to_h
+    # character = Character.load_character c.keys[0], c.values[0]
+    # p character
+    # state = Lua::State.new
+    # state.__load_stdlib :all
+    # state.__eval content
   end
 end

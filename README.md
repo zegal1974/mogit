@@ -50,4 +50,6 @@ rails g model item_appearance_items appearance:belongs_to item:belongs_to order:
 rails g model transmog_set_group name 
 rails g model transmog_set name class_mask:integer group:belongs_to flags tracking_quest:belongs_to item_name_description:belongs_to parent:belongs_to order:integer
 
-chrs = lua['DataStore_CharactersDB']['global']['Characters']
+rails g migration CreateJoinTableTransmogSetMember transmog_set item_appearance flags
+
+https://github.com/Ketho/BlizzardInterfaceResources/blob/9.0.1/Resources/LuaEnum.lua

@@ -11,16 +11,8 @@ module DatastoreLoader
     path ||= PATH
     path = path + lua_file
     lua = Rufus::Lua::State.new
-    File.open(path) do |file|
-      content = file.read
-      begin
-        lua.eval(content)
-        yield lua
-      rescue => e
-        # puts(e)
-        lua.close
-      end
-    end
+    file = File.open(path)
+    lua.eval(file.read)
     return lua
   end
 

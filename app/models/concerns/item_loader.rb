@@ -88,12 +88,12 @@ module ItemLoader
         records[item][:set_id] = set if !records[item].nil?
       end
 
-      records.each do |key, r|
-        r[:name] ||= ''
-        r[:allowable_race] ||= '-1'
-        r[:appearance_id] ||= nil
-        r[:source_type] ||= nil
-        r[:set_id] ||= nil
+      records.each do |key, value|
+        value[:name] ||= ''
+        value[:allowable_race] ||= '-1'
+        value[:appearance_id] ||= nil
+        value[:source_type] ||= nil
+        value[:set_id] ||= nil
       end
 
       Item.delete_all
@@ -111,12 +111,13 @@ module ItemLoader
       csv = load_csv "/itemset.csv", path
       csv.each do |row|
         next if row['ID'].nil?
-        sets[row['ID']] = {}
-        sets[row['ID']].merge!(map_convert(MAP_ITEM_SET, row))
+        set_id = row['ID']
+        sets[set_id] = {}
+        sets[set_id].merge!(map_convert(MAP_ITEM_SET, row))
         (0..16).each do |i|
           id = row["ItemID[#{i}]"]
           next if id == 0 or id == '0'
-          yield i, row['ID'], id
+          yield i, set_id, id
         end
       end
 
@@ -183,14 +184,32 @@ module ItemLoader
       TransmogSet.insert_all!(records.values)
     end
 
+    MAP_TRANSMOG_SET_ITEM = {
+      transmog_set_id: 'TransmogSetID',
+      item_appearance_id: 'ItemModifiedAppearanceID',
+      flags: 'Flags'
+    }
+
+    def load_transmog_set_items path=nil
+      csv = load_csv "/transmogsetitem.csv", path
+      records = []
+      csv.each do |row|
+        records << map_convert(MAP_TRANSMOG_SET_ITEM, row)
+      end
+      p records.length
+      TransmogSetMember.delete_all
+      TransmogSetMember.insert_all!(records)      
+    end
+
     def load_item_all
       load_item_appearances
       load_item_classes
       load_item_sub_classes
       load_items
-      load_item_sets
+      #load_item_sets
       load_transmog_set_groups
       load_transmog_sets
+      load_transmog_set_items
     end
   end
 end

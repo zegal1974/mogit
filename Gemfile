@@ -30,9 +30,9 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
-# gem 'rufus-lua', path: '../rufus-lua'
+gem 'rufus-lua'#, path: '../rufus-lua'
 # gem 'ruby-lua'
-gem 'rlua'
+#gem 'rlua'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

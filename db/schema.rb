@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_27_071348) do
+ActiveRecord::Schema.define(version: 2021_05_31_080923) do
 
   create_table "characters", force: :cascade do |t|
     t.string "name"
     t.integer "realm_id"
     t.datetime "last_update"
-    t.integer "faction_id", null: false
+    t.integer "faction_id"
     t.integer "race_id", null: false
     t.integer "level"
     t.integer "chr_class_id", null: false
@@ -136,6 +136,14 @@ ActiveRecord::Schema.define(version: 2021_05_27_071348) do
 
   create_table "transmog_set_groups", force: :cascade do |t|
     t.string "name"
+  end
+
+  create_table "transmog_set_members", force: :cascade do |t|
+    t.integer "transmog_set_id", null: false
+    t.integer "item_appearance_id", null: false
+    t.integer "flags", default: 0
+    t.index ["item_appearance_id"], name: "index_transmog_set_members_on_item_appearance_id"
+    t.index ["transmog_set_id"], name: "index_transmog_set_members_on_transmog_set_id"
   end
 
   create_table "transmog_sets", force: :cascade do |t|
