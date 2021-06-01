@@ -1,12 +1,13 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.1'
+ruby '2.6.1'
 
 gem 'rails', '~> 6.1.3', '>= 6.1.3.1'
 
 gem 'sqlite3', '~> 1.4'
-#gem 'pg'
+# gem 'pg'
+# gem 'enum_i18n'
 
 gem 'bulk_insert'
 
@@ -30,9 +31,7 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
-gem 'rufus-lua'#, path: '../rufus-lua'
-# gem 'ruby-lua'
-#gem 'rlua'
+gem 'rufus-lua'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

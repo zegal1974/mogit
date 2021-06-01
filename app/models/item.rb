@@ -5,25 +5,15 @@ class Item < ApplicationRecord
   belongs_to :item_sub_class
   belongs_to :set, class_name: 'ItemSet'
   belongs_to :appearance, class_name: 'ItemAppearance', inverse_of: :items
+  # belongs_to :source
 
-  # https://wowpedia.fandom.com/wiki/Const_TRANSMOG_SOURCE
-  # TRANSMOG_SOURCE_1 = "Boss Drop";
-  # TRANSMOG_SOURCE_2 = "Quest";
-  # TRANSMOG_SOURCE_3 = "Vendor";
-  # TRANSMOG_SOURCE_4 = "World Drop";
-  # TRANSMOG_SOURCE_5 = "Achievement";
-  # TRANSMOG_SOURCE_6 = "Profession";
-  enum display_type: { 1: "Boss Drop", 2: "Quest", 3: "Vendor", 4: "World Drop", 5: "Achievement", 6: "Profession"}
+  # https://github.com/Ketho/BlizzardInterfaceResources
+  enum source_type: { None: 0, JournalEncounter: 1, Quest: 2, Vendor: 3, WorldDrop: 4, 
+    HiddenUntilCollected: 5, CantCollect: 6, Achievement: 7, Profession: 8, NotValidForTransmog: 9 }
 
-  # https://wowpedia.fandom.com/wiki/Enum.ItemQuality
-  # 0	Poor	Poor	ITEM_QUALITY0_DESC
-  # 1	Common	Common	ITEM_QUALITY1_DESC
-  # 2	Uncommon	Uncommon	ITEM_QUALITY2_DESC
-  # 3	Rare	Rare	ITEM_QUALITY3_DESC
-  # 4	Epic	Epic	ITEM_QUALITY4_DESC
-  # 5	Legendary	Legendary	ITEM_QUALITY5_DESC
-  # 6	Artifact	Artifact	ITEM_QUALITY6_DESC
-  # 7	Heirloom	Heirloom	ITEM_QUALITY7_DESC
-  # 8	WoWToken  	WoW Token	ITEM_QUALITY8_DESC
-
+  enum quality: { Poor: 0, Common: 1, Uncommon: 2, Rare: 3, Epic: 4, Legendary: 5,
+		Artifact: 6, Heirloom: 7, WoWToken: 8 }
+  
+  # None, Bind on Pickup, Bind on Equip, Bind on Use, Quest
+  enum bind_type: { none: 0, acquire: 1, equip: 2, use: 3, quest: 4 }
 end
