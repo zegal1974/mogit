@@ -196,7 +196,6 @@ module ItemLoader
       csv.each do |row|
         records << map_convert(MAP_TRANSMOG_SET_ITEM, row)
       end
-      p records.length
       TransmogSetMember.delete_all
       TransmogSetMember.insert_all!(records)      
     end
@@ -206,7 +205,6 @@ module ItemLoader
       load_item_classes
       load_item_sub_classes
       load_items
-      #load_item_sets
       load_transmog_set_groups
       load_transmog_sets
       load_transmog_set_items

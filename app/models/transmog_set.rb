@@ -8,4 +8,3 @@ class TransmogSet < ApplicationRecord
   has_many :appearances, class_name: 'ItemAppearance', source: :item_appearance,
     through: :transmog_set_members
 end
-    

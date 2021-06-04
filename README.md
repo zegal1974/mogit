@@ -53,3 +53,5 @@ rails g model transmog_set name class_mask:integer group:belongs_to flags tracki
 rails g migration CreateJoinTableTransmogSetMember transmog_set item_appearance flags
 
 https://github.com/Ketho/BlizzardInterfaceResources/blob/9.0.1/Resources/LuaEnum.lua
+
+rails g model text 

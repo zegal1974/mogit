@@ -13,7 +13,7 @@ class Item < ApplicationRecord
   # TRANSMOG_SOURCE_4 = "World Drop";
   # TRANSMOG_SOURCE_5 = "Achievement";
   # TRANSMOG_SOURCE_6 = "Profession";
-  enum display_type: { 1: "Boss Drop", 2: "Quest", 3: "Vendor", 4: "World Drop", 5: "Achievement", 6: "Profession"}
+  # enum source_type: { 1: "Boss Drop", 2: "Quest", 3: "Vendor", 4: "World Drop", 5: "Achievement", 6: "Profession"}
 
   # https://wowpedia.fandom.com/wiki/Enum.ItemQuality
   # 0	Poor	Poor	ITEM_QUALITY0_DESC
