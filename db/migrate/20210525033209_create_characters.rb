@@ -4,11 +4,10 @@ class CreateCharacters < ActiveRecord::Migration[6.1]
       t.string :name
       t.belongs_to :realm
       t.datetime :last_update
-      t.belongs_to :faction#, null: false#, foreign_key: true
-      t.belongs_to :race, null: false#, foreign_key: true
+      t.belongs_to :race#, null: false#, foreign_key: true
       t.integer :level
-      t.belongs_to :chr_class, null: false#, foreign_key: true
-      t.integer :money
+      t.belongs_to :chr_class#, null: false#, foreign_key: true
+      t.integer :money, default: 0
       t.integer :gender
       t.integer :played
       t.integer :played_this_level

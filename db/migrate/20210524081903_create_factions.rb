@@ -3,9 +3,7 @@ class CreateFactions < ActiveRecord::Migration[6.1]
     create_table :factions do |t|
       t.string :name
       t.string :description
-      t.belongs_to :parent
-
-      t.timestamps
+      t.belongs_to :group
     end
   end
 end

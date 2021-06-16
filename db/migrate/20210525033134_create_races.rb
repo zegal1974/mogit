@@ -5,8 +5,6 @@ class CreateRaces < ActiveRecord::Migration[6.1]
       t.string :prefix_name
       t.string :fname
       t.string :description
-
-      t.timestamps
     end
   end
 end

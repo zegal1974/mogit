@@ -50,16 +50,19 @@ module ItemLoader
       icon_file_data_id: 'IconFileDataID'
     }
 
-    MAP_ITEM_NAME = {
-      id: 'ID',
+    MAP_ITEM_SPARSE = {
       name: 'Display_lang',
-      allowable_race: 'AllowableRace'
+      bond_type: 'Bonding',
+      level: 'ItemLevel',
+      allowable_race: 'AllowableRace',
+      expansion_id: 'ExpansionID'
     }
 
     MAP_ITEM_APPEARANCE_ITEMS = {
       id: 'ItemID',
       appearance_id: 'ItemAppearanceID',
-      source_type: 'TransmogSourceTypeEnum'
+      appearance_modifier_id: 'ItemAppearanceModifierID'
+      # source_type: 'TransmogSourceTypeEnum'
     }
 
     def load_items path = nil
@@ -72,10 +75,10 @@ module ItemLoader
         records[row['ID']].merge!(map_convert(MAP_ITEM, row))
       end
 
-      csv = load_csv "/itemsearchname.csv", path
+      csv = load_csv "/itemsparse.csv", path
       csv.each do |row|
         next if row['ID'].nil? or records[row['ID']].nil?
-        records[row['ID']].merge!(map_convert(MAP_ITEM_NAME, row))
+        records[row['ID']].merge!(map_convert(MAP_ITEM_SPARSE, row))
       end
 
       csv = load_csv "/itemmodifiedappearance.csv", path
@@ -91,8 +94,12 @@ module ItemLoader
       records.each do |key, value|
         value[:name] ||= ''
         value[:allowable_race] ||= '-1'
-        value[:appearance_id] ||= nil
-        value[:source_type] ||= nil
+        value[:appearance_id] = nil if value[:appearance_id].nil? or value[:appearance_id] == 0
+        value[:appearance_modifier_id] = nil if value[:appearance_modifier_id].nil? or value[:appearance_modifier_id] == 0
+        # value[:source_type] ||= nil
+        value[:bond_type] ||= nil
+        value[:level] ||= 0
+        value[:expansion_id] ||= nil
         value[:set_id] ||= nil
       end
 
@@ -168,8 +175,10 @@ module ItemLoader
       tracking_quest_id: 'TrackingQuestID',
       flags: 'Flags',
       group_id: 'TransmogSetGroupID',
-      item_name_description_id: 'ItemNameDescriptionID',
+      name_description_id: 'ItemNameDescriptionID',
       parent_id: 'ParentTransmogSetID',
+      expansion_id: 'ExpansionID',
+      patch: 'PatchIntroduced',
       order: 'UiOrder'
     }
 
@@ -200,11 +209,46 @@ module ItemLoader
       TransmogSetMember.insert_all!(records)      
     end
 
+    MAP_SOURCEINFO_ITEM = {
+      id: 'ID',
+      text: 'SourceText_lang',
+      source_type: 'SourceTypeEnum',
+      pvp_faction: 'PvpFaction'
+    }
+
+    def load_item_sources path=nil
+      csv = load_csv "/sourceinfo.csv", path
+      records = []
+      csv.each do |row|
+        records << map_convert(MAP_SOURCEINFO_ITEM, row)
+      end
+      ItemSource.delete_all
+      ItemSource.insert_all!(records)        
+    end
+
+    MAP_ITEM_NAME_DESCRIPTION_ITEM = {
+      id: 'ID',
+      description: 'Description_lang',
+      color: 'Color'
+    }
+
+    def load_item_name_descriptions path=nil
+      csv = load_csv "/itemnamedescription.csv", path
+      records = []
+      csv.each do |row|
+        records << map_convert(MAP_ITEM_NAME_DESCRIPTION_ITEM, row)
+      end
+      ItemNameDescription.delete_all
+      ItemNameDescription.insert_all!(records)        
+    end
+
     def load_item_all
       load_item_appearances
       load_item_classes
       load_item_sub_classes
       load_items
+      # load_item_sources
+      load_item_name_descriptions
       load_transmog_set_groups
       load_transmog_sets
       load_transmog_set_items

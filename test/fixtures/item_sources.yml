@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  text: MyString
+  pvp_faction: 1
+  source_type: 1
+
+two:
+  text: MyString
+  pvp_faction: 1
+  source_type: 1

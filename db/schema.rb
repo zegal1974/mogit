@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_31_080923) do
+ActiveRecord::Schema.define(version: 2021_06_04_140201) do
 
   create_table "characters", force: :cascade do |t|
     t.string "name"
@@ -49,21 +49,16 @@ ActiveRecord::Schema.define(version: 2021_05_31_080923) do
   end
 
   create_table "faction_groups", force: :cascade do |t|
-    t.integer "did"
     t.string "name"
     t.string "internal_name"
     t.integer "mask_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "factions", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.integer "parent_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["parent_id"], name: "index_factions_on_parent_id"
+    t.integer "group_id"
+    t.index ["group_id"], name: "index_factions_on_group_id"
   end
 
   create_table "item_appearances", force: :cascade do |t|
@@ -78,8 +73,11 @@ ActiveRecord::Schema.define(version: 2021_05_31_080923) do
 
   create_table "item_classes", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "item_name_descriptions", force: :cascade do |t|
+    t.string "description"
+    t.integer "color"
   end
 
   create_table "item_sets", force: :cascade do |t|
@@ -87,19 +85,24 @@ ActiveRecord::Schema.define(version: 2021_05_31_080923) do
     t.integer "flags"
   end
 
+  create_table "item_sources", force: :cascade do |t|
+    t.string "text"
+    t.integer "pvp_faction"
+    t.integer "source_type"
+  end
+
   create_table "item_sub_classes", force: :cascade do |t|
     t.string "name"
-    t.integer "parent_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.integer "parent_id"
     t.index ["parent_id"], name: "index_item_sub_classes_on_parent_id"
   end
 
   create_table "items", force: :cascade do |t|
     t.string "name"
-    t.integer "item_class_id"
-    t.integer "item_sub_class_id"
-    t.integer "quality"
+    t.integer "item_class_id", null: false
+    t.integer "item_sub_class_id", null: false
+    t.string "name_description"
+    t.integer "quality", default: 0
     t.integer "allowable_race"
     t.integer "inventory_type"
     t.integer "sheathe_type"
@@ -107,15 +110,19 @@ ActiveRecord::Schema.define(version: 2021_05_31_080923) do
     t.integer "level", default: 0
     t.integer "min_level"
     t.integer "stack_count"
-    t.integer "bind_type"
+    t.integer "bond_type"
+    t.integer "expansion_id"
+    t.integer "start_quest_id"
     t.integer "set_id"
+    t.integer "source_id"
     t.integer "appearance_id"
-    t.integer "source_type"
+    t.integer "appearance_modifier_id"
     t.string "description"
     t.index ["appearance_id"], name: "index_items_on_appearance_id"
     t.index ["item_class_id"], name: "index_items_on_item_class_id"
     t.index ["item_sub_class_id"], name: "index_items_on_item_sub_class_id"
     t.index ["set_id"], name: "index_items_on_set_id"
+    t.index ["source_id"], name: "index_items_on_source_id"
   end
 
   create_table "races", force: :cascade do |t|
@@ -150,13 +157,15 @@ ActiveRecord::Schema.define(version: 2021_05_31_080923) do
     t.string "name"
     t.integer "class_mask"
     t.integer "group_id", null: false
-    t.string "flags"
+    t.integer "flags"
     t.integer "tracking_quest_id"
-    t.integer "item_name_description_id"
+    t.integer "name_description_id"
     t.integer "parent_id"
     t.integer "order"
+    t.integer "expansion_id"
+    t.integer "patch"
     t.index ["group_id"], name: "index_transmog_sets_on_group_id"
-    t.index ["item_name_description_id"], name: "index_transmog_sets_on_item_name_description_id"
+    t.index ["name_description_id"], name: "index_transmog_sets_on_name_description_id"
     t.index ["parent_id"], name: "index_transmog_sets_on_parent_id"
     t.index ["tracking_quest_id"], name: "index_transmog_sets_on_tracking_quest_id"
   end

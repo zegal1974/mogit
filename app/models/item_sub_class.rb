@@ -1,3 +1,3 @@
 class ItemSubClass < ApplicationRecord
-  belongs_to :parent, class_name: 'ItemClass', optional: true
+  belongs_to :parent, class_name: 'ItemClass'
 end
