@@ -35,6 +35,8 @@ gem 'rufus-lua'
 
 gem 'hamlit'
 
+gem 'sassc-rails', '~> 2.1.0'
+
 # i18n
 gem 'rails-i18n'
 # gem 'gettext_i18n_rails', '~> 1.8.0'

@@ -1,0 +1,44 @@
+%p#notice= notice
+%h1 Characters
+%table
+  %thead
+    %tr
+      %th Name
+      %th Last update
+      %th Faction
+      %th Race
+      %th Level
+      %th Chr class
+      %th Money
+      %th Gender
+      %th Played
+      %th Played this level
+      %th Active covenant
+      %th Last logout
+      %th Zone
+      %th Sub zone
+      %th Bind location
+      %th{:colspan => "3"}
+  %tbody
+    - @characters.each do |character|
+      %tr
+        %td= character.name
+        %td= character.last_update
+        %td= character.faction_id
+        %td= character.race_id
+        %td= character.level
+        %td= character.chr_class_id
+        %td= character.money
+        %td= character.gender
+        %td= character.played
+        %td= character.played_this_level
+        %td= character.active_covenant_id
+        %td= character.last_logout
+        %td= character.zone
+        %td= character.sub_zone
+        %td= character.bind_location
+        %td= link_to 'Show', character
+        %td= link_to 'Edit', edit_character_path(character)
+        %td= link_to 'Destroy', character, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Character', new_character_path

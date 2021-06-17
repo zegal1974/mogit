@@ -1,3 +1,5 @@
+require 'csv'
+
 module CsvLoader
   DEFAULT_PATH = 'public/db/'
 

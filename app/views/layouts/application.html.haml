@@ -1,0 +1,17 @@
+!!!
+%html
+  %head
+    %title Mogit
+    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    -# = stylesheet_pack_tag 'application'
+  %body
+    = render 'layouts/navbar'
+    .container
+      %aside.sidebar
+      %main.main
+        = yield
+    %footer.footer
+      = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'

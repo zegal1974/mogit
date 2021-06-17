@@ -1,6 +1,4 @@
 class Item < ApplicationRecord
-  include ItemLoader
-
   belongs_to :item_sub_class
   belongs_to :set, class_name: 'ItemSet'
   belongs_to :appearance, class_name: 'ItemAppearance', inverse_of: :items
@@ -15,5 +13,9 @@ class Item < ApplicationRecord
 
   def item_class
     return item_sub_class.parent if !item_sub_class.nil?
+  end
+
+  def find_class_id id
+    Item.joins(:item_sub_class).where(item_class_id: id).count
   end
 end

@@ -16,11 +16,10 @@ ActiveRecord::Schema.define(version: 2021_06_04_140201) do
     t.string "name"
     t.integer "realm_id"
     t.datetime "last_update"
-    t.integer "faction_id"
-    t.integer "race_id", null: false
+    t.integer "race_id"
     t.integer "level"
-    t.integer "chr_class_id", null: false
-    t.integer "money"
+    t.integer "chr_class_id"
+    t.integer "money", default: 0
     t.integer "gender"
     t.integer "played"
     t.integer "played_this_level"
@@ -33,7 +32,6 @@ ActiveRecord::Schema.define(version: 2021_06_04_140201) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["active_covenant_id"], name: "index_characters_on_active_covenant_id"
     t.index ["chr_class_id"], name: "index_characters_on_chr_class_id"
-    t.index ["faction_id"], name: "index_characters_on_faction_id"
     t.index ["race_id"], name: "index_characters_on_race_id"
     t.index ["realm_id"], name: "index_characters_on_realm_id"
   end
@@ -93,13 +91,14 @@ ActiveRecord::Schema.define(version: 2021_06_04_140201) do
 
   create_table "item_sub_classes", force: :cascade do |t|
     t.string "name"
+    t.string "vname"
+    t.integer "order"
     t.integer "parent_id"
     t.index ["parent_id"], name: "index_item_sub_classes_on_parent_id"
   end
 
   create_table "items", force: :cascade do |t|
     t.string "name"
-    t.integer "item_class_id", null: false
     t.integer "item_sub_class_id", null: false
     t.string "name_description"
     t.integer "quality", default: 0
@@ -119,7 +118,6 @@ ActiveRecord::Schema.define(version: 2021_06_04_140201) do
     t.integer "appearance_modifier_id"
     t.string "description"
     t.index ["appearance_id"], name: "index_items_on_appearance_id"
-    t.index ["item_class_id"], name: "index_items_on_item_class_id"
     t.index ["item_sub_class_id"], name: "index_items_on_item_sub_class_id"
     t.index ["set_id"], name: "index_items_on_set_id"
     t.index ["source_id"], name: "index_items_on_source_id"
@@ -130,8 +128,6 @@ ActiveRecord::Schema.define(version: 2021_06_04_140201) do
     t.string "prefix_name"
     t.string "fname"
     t.string "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "realms", force: :cascade do |t|

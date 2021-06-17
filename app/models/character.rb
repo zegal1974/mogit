@@ -1,5 +1,4 @@
 class Character < ApplicationRecord
-  include ChrLoader
   include DatastoreChrLoader
 
   belongs_to :realm, optional: true
