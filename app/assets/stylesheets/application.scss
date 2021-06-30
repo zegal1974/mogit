@@ -15,3 +15,31 @@
  */
  
  @import "bootstrap/dist/css/bootstrap";
+
+ .achievement-box {
+  padding: 0;
+
+  .content {
+    padding: 2px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .title {
+    border-bottom: 1px solid #dee2e6;
+    padding: 2px;
+  }
+
+  .description {
+    display: block;
+    padding: 5px;
+    height: 60px;
+  }
+
+  .reward {
+    display: block;
+    justify-content: flex-end;
+    padding: 2px;
+    border-top: 1px solid #dee2e6;
+  }
+}

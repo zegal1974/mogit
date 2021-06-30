@@ -11,4 +11,11 @@ namespace :wow do
       DbcLoader.send("load_#{args.category}")
     end
   end
+
+  namespace :ds do
+    desc "Load WOW all DataStore Data"
+    task all: :environment do
+      DsLoader::load_all
+    end
+  end
 end

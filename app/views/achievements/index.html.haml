@@ -1,0 +1,6 @@
+.container
+  .row
+    .category.col-4
+      = render partial: 'categories', locals: {categories: @categories}
+    .achievement.col-8
+      = render partial: 'achievements', locals: {achievements: @achievements}

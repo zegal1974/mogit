@@ -10,7 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_04_140201) do
+ActiveRecord::Schema.define(version: 2021_06_27_124352) do
+
+  create_table "achievement_categories", force: :cascade do |t|
+    t.string "name"
+    t.integer "parent_id"
+    t.integer "order"
+    t.index ["parent_id"], name: "index_achievement_categories_on_parent_id"
+  end
+
+  create_table "achievements", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "reward"
+    t.integer "instance_id"
+    t.integer "faction_id"
+    t.integer "supercede_id"
+    t.integer "category_id"
+    t.integer "points"
+    t.integer "flags"
+    t.integer "order"
+    t.integer "icon_file_id"
+    t.integer "reward_item_id"
+    t.integer "minimum_criteria"
+    t.integer "criteria_tree"
+    t.integer "shares_criteria"
+    t.integer "covenant_id"
+    t.index ["category_id"], name: "index_achievements_on_category_id"
+    t.index ["covenant_id"], name: "index_achievements_on_covenant_id"
+    t.index ["faction_id"], name: "index_achievements_on_faction_id"
+    t.index ["icon_file_id"], name: "index_achievements_on_icon_file_id"
+    t.index ["instance_id"], name: "index_achievements_on_instance_id"
+    t.index ["reward_item_id"], name: "index_achievements_on_reward_item_id"
+    t.index ["supercede_id"], name: "index_achievements_on_supercede_id"
+  end
 
   create_table "characters", force: :cascade do |t|
     t.string "name"
@@ -55,8 +88,20 @@ ActiveRecord::Schema.define(version: 2021_06_04_140201) do
   create_table "factions", force: :cascade do |t|
     t.string "name"
     t.string "description"
+    t.integer "reputation_index", default: -1
+    t.integer "expansion"
+    t.integer "race_mask_0", default: 0
+    t.integer "race_mask_1", default: 0
+    t.integer "race_mask_2", default: 0
+    t.integer "race_mask_3", default: 0
+    t.integer "class_mask_0", default: 0
+    t.integer "class_mask_1", default: 0
+    t.integer "class_mask_2", default: 0
+    t.integer "class_mask_3", default: 0
+    t.integer "parent_id"
     t.integer "group_id"
     t.index ["group_id"], name: "index_factions_on_group_id"
+    t.index ["parent_id"], name: "index_factions_on_parent_id"
   end
 
   create_table "item_appearances", force: :cascade do |t|
@@ -137,6 +182,18 @@ ActiveRecord::Schema.define(version: 2021_06_04_140201) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "reputations", force: :cascade do |t|
+    t.integer "faction_id", null: false
+    t.integer "character_id", null: false
+    t.integer "earned"
+    t.integer "level"
+    t.integer "value"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["character_id"], name: "index_reputations_on_character_id"
+    t.index ["faction_id"], name: "index_reputations_on_faction_id"
+  end
+
   create_table "transmog_set_groups", force: :cascade do |t|
     t.string "name"
   end
@@ -166,4 +223,6 @@ ActiveRecord::Schema.define(version: 2021_06_04_140201) do
     t.index ["tracking_quest_id"], name: "index_transmog_sets_on_tracking_quest_id"
   end
 
+  add_foreign_key "reputations", "characters"
+  add_foreign_key "reputations", "factions"
 end

@@ -1,0 +1,7 @@
+= render partial: 'reputation', locals: {rep: rep}
+
+- unless rep[:children].empty?
+  .collapse(id="reputation-#{rep[:id]}")
+    %ul.list-group
+      - rep[:children].each do |c|
+        = render partial: 'reputation', locals: {rep: c}

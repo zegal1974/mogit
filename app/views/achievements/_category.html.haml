@@ -1,0 +1,12 @@
+%li.list-group-item
+  .category(type="button" data-bs-toggle="collapse" href="#category-#{category.id}")
+    = category.name
+
+- if !category.children.empty?
+  .collapse(id="category-#{category.id}")
+    %ul.list-group
+      - category.children.each do |c|
+        %li.list-group-item
+          .category-child.ms-2
+            = c.name
+  

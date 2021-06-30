@@ -1,0 +1,15 @@
+%li.list-group-item
+  - if rep[:value]
+    .container
+      .row
+        .col(type="button" data-bs-toggle="collapse" href="#reputation-#{rep[:id]}")
+          = rep[:name]
+        .col
+          = rep[:level]
+        .col
+          .progress.position-relative
+            .progress-bar(role="progressbar" style="width: #{rep[:rate]}%; background-color: #{reputation_background(rep[:level_en])};" aria-valuenow="#{rep[:value]}" aria-valuemin="0" aria-valuemax="#{rep[:top]}")
+            %small.justify-content-center.d-flex.position-absolute.w-100
+              = "#{rep[:value]} / #{rep[:top]}"
+  - else
+    %div(type="button" data-bs-toggle="collapse" href="#reputation-#{rep[:id]}")= rep[:name]

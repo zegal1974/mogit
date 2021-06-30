@@ -97,6 +97,8 @@ GEM
     database_cleaner-core (2.0.1)
     diff-lcs (1.4.4)
     docile (1.4.0)
+    enum_help (0.0.17)
+      activesupport (>= 3.0.0)
     erubi (1.10.0)
     factory_bot (6.2.0)
       activesupport (>= 5.0.0)
@@ -203,6 +205,7 @@ GEM
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redis (4.3.1)
     regexp_parser (2.1.1)
     rexml (3.2.5)
     rouge (3.26.0)
@@ -283,9 +286,8 @@ GEM
       tty-screen (~> 0.8)
       wisper (~> 2.0)
     tty-screen (0.8.1)
-    turbolinks (5.2.1)
-      turbolinks-source (~> 5.2)
-    turbolinks-source (5.2.0)
+    turbo-rails (0.5.11)
+      rails (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.0.0)
@@ -322,6 +324,7 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   database_cleaner
+  enum_help
   factory_bot_rails
   hamlit
   jbuilder (~> 2.7)
@@ -336,6 +339,7 @@ DEPENDENCIES
   rails-controller-testing
   rails-erd
   rails-i18n
+  redis (~> 4.0)
   rspec-rails (~> 5.0.0)
   rufus-lua
   sass-rails (>= 6)
@@ -346,7 +350,7 @@ DEPENDENCIES
   spring-commands-rspec
   sqlite3 (~> 1.4)
   test-prof
-  turbolinks (~> 5)
+  turbo-rails
   tzinfo-data
   web-console (>= 4.1.0)
   webpacker (~> 5.0)

@@ -1,0 +1,6 @@
+-if @character
+  = @character.name
+
+%ul.list-group
+  - @reputations.each do |rep|
+    = render partial: 'reputations', locals: {rep: rep}

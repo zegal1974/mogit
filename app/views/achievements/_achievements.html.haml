@@ -1,0 +1,12 @@
+-# %turbo-frame.achievements-list
+%ul.list-group
+  - achievements.each do |achievement|
+    %li.list-group-item.achievement-box
+      .container
+        .row
+          .content.col-11.text-center
+            .title= achievement.name
+            .description= achievement.description
+            .reward.text-center= achievement.reward
+          .points.col-1
+            .position-absolute.top-50= achievement.points

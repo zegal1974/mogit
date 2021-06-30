@@ -1,0 +1,13 @@
+zh-cn:
+  enums:
+    reputation:
+      level:
+        hated: 仇恨
+        hostile: 敌对
+        unfriendly: 冷淡
+        neutral: 中立
+        friendly: 友善
+        honored: 尊敬
+        revered: 崇敬
+        exalted: 崇拜
+        paragon: 巅峰
